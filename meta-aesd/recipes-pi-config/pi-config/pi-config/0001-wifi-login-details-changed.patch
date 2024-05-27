@@ -1,0 +1,24 @@
+From 8dc3869b1e2fdb01c7b2dd1598f7b93b8db40401 Mon Sep 17 00:00:00 2001
+From: Andy Pabst <andy.pabst16@gmail.com>
+Date: Mon, 27 May 2024 23:39:58 +0000
+Subject: [PATCH] wifi login details changed
+
+---
+ pi-config/wpa_supplicant.conf | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pi-config/wpa_supplicant.conf b/pi-config/wpa_supplicant.conf
+index f98a2d3..9c3d95d 100644
+--- a/pi-config/wpa_supplicant.conf
++++ b/pi-config/wpa_supplicant.conf
+@@ -4,8 +4,8 @@ update_config=1
+ country=US
+ 
+ network={
+-    ssid="<WIFI NAME>"
+-    psk="<PASSWORD>"
++    ssid="[PUT WIFI NAME HERE!!]"
++    psk="[PUT PASSWORD HERE!!]"
+     key_mgmt="WPA2-PSK"
+     scan_ssid=1
+ }
