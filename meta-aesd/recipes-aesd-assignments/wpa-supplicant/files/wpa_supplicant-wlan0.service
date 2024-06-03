@@ -1,0 +1,17 @@
+[Unit]
+Description=WPA supplicant
+Before=network.target dhclient.service wpa_supplicant.service
+After=dbus.service
+Wants=network.target
+After=sys-subsystem-net-devices-wlan0.device
+
+[Service]
+Type=dbus
+BusName=fi.w1.wpa_supplicant1
+ExecStart=/usr/sbin/wpa_supplicant -c/etc/wpa_supplicant/wpa_supplicant-wlan0.conf -iwlan0
+ExecReload=/bin/kill -HUP SMAINPID
+RuntimeDirectory=wpa_supplicant
+RuntimeDirectory=0750
+          
+[Install]                                                     
+WantedBy=multi-user.target
