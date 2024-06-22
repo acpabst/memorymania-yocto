@@ -1,15 +1,22 @@
-#! /bin/sh
+#! /bin/bash
 
+### BEGIN INIT INFO
+# Required-Start:    $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+### END INIT INFO
+
+KERNEL_VERSION=$(uname -r)
 
 case "$1" in
 start)
 echo "Starting init script for Module Loading"
-start-stop-daemon -S -n init -a /usr/bin/aesdchar_load
+start-stop-daemon -S -n init -a /lib/modules/${KERNEL_VERSION}/aesdchar_load
 ;;
 stop)
 echo "Removing user modules"
 start-stop-daemon -K -n aesdchar_load
-start-stop-daemon -S -n init -a /usr/bin/aesdchar_unload
+start-stop-daemon -S -n init -a /lib/modules/${KERNEL_VERSION}/aesdchar_unload
 ;;
 *)
 echo "Usage: $0 {start|stop}"

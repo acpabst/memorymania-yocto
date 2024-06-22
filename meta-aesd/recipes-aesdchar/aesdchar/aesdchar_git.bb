@@ -18,13 +18,16 @@ EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
 EXTRA_OEMAKE:append:task-install = " -C ${STAGING_KERNEL_DIR}"
 
 inherit update-rc.d
-FILES:${PN} += "${bindir}/aesdchar_load ${bindir}/aesdchar_unload"
-FILES:${PN} += "${sysconfdir}/init.d/aesdchar_init"
+FILES:${PN} += "${base_libdir}/modules/${KERNEL_VERSION}/aesdchar_load \
+		${base_libdir}/modules/${KERNEL_VERSION}/aesdchar_unload \
+		${sysconfdir}/init.d/aesdchar_init \
+		${sysconfdir}/rc5.d/aesdchar_init \
+		"
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME = "aesdchar_init"
 
 #inherit autotools
-FILES:${PN} += "home/flush_test/flush_test /home/flush_test/run_flush.sh"
+FILES:${PN} += "home/flush_test/flush_test /home/flush_test/run_flush.sh ${includedir}/aesd_ioctl.h"
 
 do_configure () {
         :
@@ -37,13 +40,16 @@ do_compile () {
 do_install () {
         install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/
         install -m 0755 ${S}/aesdchar.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/
-
-	install -d ${D}${bindir}
-	install -m 0755 ${S}/aesdchar_load ${D}${bindir}/
-	install -m 0755 ${S}/aesdchar_unload ${D}${bindir}/
+	install -m 0755 ${S}/aesdchar_load ${D}${base_libdir}/modules/${KERNEL_VERSION}/
+	install -m 0755 ${S}/aesdchar_unload ${D}${base_libdir}/modules/${KERNEL_VERSION}/
 
         install -d ${D}${sysconfdir}/init.d
+        install -d ${D}${sysconfdir}/rc5.d
         install -m 0755 ${WORKDIR}/aesdchar_init ${D}${sysconfdir}/init.d
+        ln -sf ../init.d/aesdchar_init ${D}${sysconfdir}/rc5.d/
+	
+	install -d ${D}${includedir}
+	install -m 0755 ${S}/aesd_ioctl.h ${D}${includedir}/
 
 	# install test files
 	install -d ${D}/home/flush_test/
