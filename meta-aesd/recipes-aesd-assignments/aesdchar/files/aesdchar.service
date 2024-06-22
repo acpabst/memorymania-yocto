@@ -1,0 +1,15 @@
+[Unit]
+Description=aesdchar
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+
+ExecStart=/lib/modules/5.15.92-v8/aesdchar_load
+ExecStop=/lib/modules/5.15.92-v8/aesdchar_unload
+#ExecReload=/bin/kill -HUP SMAINPID
+#Restart=always
+#RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
