@@ -42,4 +42,7 @@ do_install () {
 
 	install -d ${D}/${systemd_system_unitdir}
 	install -m 644 ${WORKDIR}/aesdchar.service ${D}/${systemd_system_unitdir}
+
+	install -d ${D}${includedir}
+        install -m 0755 ${S}/aesd_ioctl.h ${D}${includedir}/
 }
