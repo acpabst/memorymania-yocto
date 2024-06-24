@@ -5,15 +5,15 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI = "git://git@github.com/acpabst/memorymania;protocol=ssh;branch=main"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "b915eea20d2f8dcec877d448c10591896ac3a1bf"
+SRCREV = "231c0b01f8a3dcd645c3e659c576e116f9644c76"
 
-DEPENDS += "aesdchar"
+DEPENDS += "aesdchar ncurses"
 
 S = "${WORKDIR}/git"
 
 FILES:${PN} += "${bindir}/memorymania"
 
-#TARGET_LDFLAGS += "-pthread -lrt"
+TARGET_LDFLAGS += "-lncurses"
 
 do_configure () {
         :
