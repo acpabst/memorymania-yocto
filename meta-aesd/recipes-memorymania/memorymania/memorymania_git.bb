@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI = "git://git@github.com/acpabst/memorymania;protocol=ssh;branch=main"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "633547cb43a9f291516d90514f51bc3bc33f4579"
+SRCREV = "b915eea20d2f8dcec877d448c10591896ac3a1bf"
 
 DEPENDS += "aesdchar"
 
